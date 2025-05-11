@@ -45,6 +45,6 @@ CREATE TABLE IF NOT EXISTS `venda` (
   KEY `fk_venda_cliente_idx` (`id_cliente`),
   KEY `fk_venda_produto_idx` (`id_produto`),
   CONSTRAINT `fk_venda_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `fk_venda_funcionario` FOREIGN KEY (`id_vendedor`) REFERENCES `funcionario` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `fk_venda_funcionario` FOREIGN KEY (`id_vendedor`) REFERENCES `funcionario` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `fk_venda_produto` FOREIGN KEY (`id_produto`) REFERENCES `produto` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
