@@ -146,3 +146,35 @@ END $$
 
 DELIMITER ;
 
+
+-- Views -------------------------------------------------------------------------------------
+
+CREATE OR REPLACE VIEW vw_vendas_por_cliente AS
+SELECT
+  c.id AS cliente_id,
+  c.nome AS cliente_nome,
+  COUNT(v.id) AS total_vendas,
+  SUM(v.valor * v.quantidade) AS valor_total
+FROM cliente c
+JOIN venda v ON v.id_cliente = c.id
+GROUP BY c.id, c.nome;
+
+CREATE OR REPLACE VIEW vw_vendas_por_produto AS
+SELECT
+  p.id AS produto_id,
+  p.nome AS produto_nome,
+  SUM(v.quantidade) AS unidades_vendidas,
+  SUM(v.valor * v.quantidade) AS receita_total
+FROM produto p
+JOIN venda v ON v.id_produto = p.id
+GROUP BY p.id, p.nome;
+
+CREATE OR REPLACE VIEW vw_vendas_por_vendedor AS
+SELECT
+  f.id AS vendedor_id,
+  f.nome AS vendedor_nome,
+  COUNT(v.id) AS vendas_realizadas,
+  SUM(v.valor * v.quantidade) AS faturamento
+FROM funcionario f
+JOIN venda v ON v.id_vendedor = f.id
+GROUP BY f.id, f.nome;
