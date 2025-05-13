@@ -1,8 +1,5 @@
-INSERT INTO `ecommerce_jogos`.`cliente`
-(`nome`,
-`sexo`,
-`idade`,
-`nascimento`)
+INSERT INTO `cliente`
+(`nome`, `sexo`, `idade`, `nascimento`)
 VALUES
 ('Ana Souza', 'f', 25, '1999-04-10'),
 ('Bruno Lima', 'm', 32, '1992-08-15'),
@@ -123,6 +120,22 @@ INSERT INTO `ecommerce_jogos`.`funcionario`
  `cargo`,
  `salario`,
  `nascimento`)
+INSERT INTO `clienteespecial`
+(`nome`, `sexo`, `idade`, `id_cliente`, `cashback`)
+VALUES
+('Xavier Dutra', 'm', 30, 50, 15.18),
+('Larissa Rios', 'f', 27, 88, 13.41),
+('Quésia Luz', 'f', 27, 17, 10.11),
+('Wellington Ramos', 'm', 37, 97, 7.74),
+('Bruna Tavares', 'f', 21, 78, 18.67),
+('Igor Almeida', 'm', 22, 9, 5.06),
+('Kleber Martins', 'm', 26, 11, 12.45),
+('Ursula Neves', 'f', 29, 21, 15.3),
+('Quezia Andrade', 'f', 36, 67, 13.79),
+('Heloísa Cruz', 'f', 35, 84, 11.06);
+
+INSERT INTO `funcionario`
+(`nome`, `sexo`, `idade`, `cargo`,`salario`, `nascimento`)
 VALUES
 -- Inserindo Vendedores
 ('Ana Souza', 'f', 28, 'vendedor', 2500.00, '1997-03-15'),
@@ -152,11 +165,8 @@ VALUES
 
 
 -- Inserindo 20 Produtos
-INSERT INTO `ecommerce_jogos`.`produto`
-(`nome`,
- `quantidade`,
- `descricao`,
- `valor`)
+INSERT INTO `produto`
+(`nome`, `quantidade`, `descricao`, `valor`)
 VALUES
 ('Console PlayStation 5', 100, 'Console de videogame de última geração, com 1TB de armazenamento e jogos exclusivos.', 4999.99),
 ('Xbox Series X', 80, 'Console de videogame da Microsoft, 1TB de armazenamento e compatível com jogos de alta performance.', 4999.00),
@@ -179,66 +189,18 @@ VALUES
 ('Teclado Mecânico Razer BlackWidow', 60, 'Teclado mecânico para gamers com switches verdes e retroiluminação RGB.', 999.00),
 ('Carregador de Celular Anker PowerCore 20000mAh', 300, 'Carregador portátil com 20000mAh, ideal para manter seu dispositivo carregado durante o dia todo.', 199.90);
 
-INSERT INTO `ecommerce_jogos`.`venda` 
-(`id_vendedor`,
- `id_cliente`,
- `data`)
+INSERT INTO `venda`
+(`id_cliente`, `id_vendedor`, `data`, `valor`)
 VALUES
-(1, 1, '2025-05-01'),
-(1, 2, '2025-05-01'),
-(1, 3, '2025-05-02'),
-(2, 4, '2025-05-02'),
-(2, 5, '2025-05-02'),
-(2, 6, '2025-05-03'),
-(3, 7, '2025-05-03'),
-(3, 8, '2025-05-04'),
-(3, 9, '2025-05-04'),
-(4, 10, '2025-05-05'),
-(4, 11, '2025-05-05'),
-(4, 12, '2025-05-06'),
-(5, 13, '2025-05-06'),
-(5, 14, '2025-05-07'),
-(5, 15, '2025-05-07'),
-(6, 16, '2025-05-08'),
-(6, 17, '2025-05-08'),
-(6, 18, '2025-05-09'),
-(7, 19, '2025-05-09'),
-(7, 20, '2025-05-10'),
-(8, 1, '2025-05-10'),
-(8, 2, '2025-05-11'),
-(8, 3, '2025-05-11'),
-(9, 4, '2025-05-12'),
-(9, 5, '2025-05-12'),
-(9, 6, '2025-05-13'),
-(10, 7, '2025-05-13'),
-(10, 8, '2025-05-14'),
-(10, 9, '2025-05-14'),
-(11, 10, '2025-05-15'),
-(11, 11, '2025-05-15'),
-(11, 12, '2025-05-16'),
-(12, 13, '2025-05-16'),
-(12, 14, '2025-05-17'),
-(12, 15, '2025-05-17'),
-(13, 16, '2025-05-18'),
-(13, 17, '2025-05-18'),
-(13, 18, '2025-05-19'),
-(14, 19, '2025-05-19'),
-(14, 20, '2025-05-20'),
-(15, 1, '2025-05-20'),
-(15, 2, '2025-05-21'),
-(15, 3, '2025-05-21'),
-(16, 4, '2025-05-22'),
-(16, 5, '2025-05-22'),
-(16, 6, '2025-05-23'),
-(17, 7, '2025-05-23'),
-(17, 8, '2025-05-24'),
-(17, 9, '2025-05-24'),
-(18, 10, '2025-05-25'),
-(18, 11, '2025-05-25'),
-(18, 12, '2025-05-26'),
-(19, 13, '2025-05-26'),
-(19, 14, '2025-05-27'),
-(19, 15, '2025-05-27'),
-(20, 16, '2025-05-28'),
-(20, 17, '2025-05-28'),
-(20, 18, '2025-05-29');
+(1, 1, '2025-05-01', 890.00),
+(2, 2, '2025-05-02', 1120.00),
+(3, 3, '2025-05-03', 2330.00),  
+(4, 3, '2025-05-04', 2740.00),  
+(5, 3, '2025-05-05', 1985.00),  
+(6, 3, '2025-05-06', 2590.00),  
+(7, 4, '2025-05-07', 1025.00),
+(8, 5, '2025-05-08', 1170.00),
+(9, 6, '2025-05-09', 945.00),
+(10, 7, '2025-05-10', 1335.00),
+(5, 1, '2025-05-11', 690.00),
+(3, 4, '2025-05-12', 800.00);
