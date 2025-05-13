@@ -2,6 +2,7 @@
 
 ## Estrutura de Diretórios
 
+```
 📦 ecommerce-db2
 ├── 📂 src
 │   └── 📂 main
@@ -20,3 +21,4 @@
 ├── 📂 lib
 │   └── mysql-connector-java-8.0.30.jar        # Driver JDBC do MySQL
 └── .gitignore                                 # Arquivos ignorados pelo Git
+```
