@@ -11,8 +11,6 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 
 -- cliente especial aqui
 
-
-CREATE TABLE IF NOT EXISTS`funcionario` (
 CREATE TABLE IF NOT EXISTS `clienteespecial` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,

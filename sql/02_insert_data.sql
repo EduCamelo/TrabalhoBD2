@@ -111,28 +111,6 @@ VALUES
 ('Yuri Nascimento', 'm', 34, '1990-04-15'),
 ('Zoe Barcellos', 'f', 25, '1999-08-28');
 
--- cliente especial aqui
-
-INSERT INTO `ecommerce_jogos`.`funcionario`
-(`nome`, 
-`sexo`,
- `idade`,
- `cargo`,
- `salario`,
- `nascimento`)
-INSERT INTO `clienteespecial`
-(`nome`, `sexo`, `idade`, `id_cliente`, `cashback`)
-VALUES
-('Xavier Dutra', 'm', 30, 50, 15.18),
-('Larissa Rios', 'f', 27, 88, 13.41),
-('Quésia Luz', 'f', 27, 17, 10.11),
-('Wellington Ramos', 'm', 37, 97, 7.74),
-('Bruna Tavares', 'f', 21, 78, 18.67),
-('Igor Almeida', 'm', 22, 9, 5.06),
-('Kleber Martins', 'm', 26, 11, 12.45),
-('Ursula Neves', 'f', 29, 21, 15.3),
-('Quezia Andrade', 'f', 36, 67, 13.79),
-('Heloísa Cruz', 'f', 35, 84, 11.06);
 
 INSERT INTO `funcionario`
 (`nome`, `sexo`, `idade`, `cargo`,`salario`, `nascimento`)
