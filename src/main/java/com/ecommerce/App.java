@@ -121,6 +121,16 @@ public class App {
                                 int percente = input.nextInt();
                                 DB.reajustarSalarios(escolha, percente);
                                 break;
+                            case 8:
+                                DB.exibirVendasPorCliente();
+                                break;
+                            case 9:
+                                DB.exibirVendasPorProduto();
+                                break;
+                            case 10:
+                                DB.exibirVendasPorVendedor();
+                                break;
+
                             default:
                                 break;
                         }
@@ -150,14 +160,17 @@ public class App {
     private static void menuDB() {
         System.out.println();
         System.out.println("--- OPÇÕES --- ");
-        System.out.println("1. Criar tabelas");
-        System.out.println("2. Deletar tabelas");
-        System.out.println("3. Inserir novo cliente");
-        System.out.println("4. Inserir novo produto");
-        System.out.println("5. Fazer uma venda");
-        System.out.println("6. Sortear cliente");
-        System.out.println("7. Reajustar salários");
-        System.out.println("0. Sair do banco de dados");
+        System.out.println("1.  Criar tabelas");
+        System.out.println("2.  Deletar tabelas");
+        System.out.println("3.  Inserir novo cliente");
+        System.out.println("4.  Inserir novo produto");
+        System.out.println("5.  Fazer uma venda");
+        System.out.println("6.  Sortear cliente");
+        System.out.println("7.  Reajustar salários");
+        System.out.println("8.  Exibir Vendas por cliente");
+        System.out.println("9.  Exibir vendas por produto");
+        System.out.println("10. Exibir vendas por vendedor");
+        System.out.println("0.  Sair do banco de dados");
         System.out.println();
         System.out.print("Escolha uma das opções: ");
 

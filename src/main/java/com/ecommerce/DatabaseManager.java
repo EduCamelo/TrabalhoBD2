@@ -298,107 +298,246 @@ public class DatabaseManager {
                         ('Similique Facere', 174, 'Non perspiciatis asperiores accusantium unde odit architecto doloremque.', 4571.76);
                         """,
                 """
-                    INSERT INTO cliente (nome, sexo, idade, nascimento) VALUES
-                        ('Asafe da Cruz', 'o', 23, '2002-03-06'),
-                        ('Hellena Sampaio', 'm', 35, '1990-05-10'),
-                        ('Aurora Santos', 'm', 66, '1959-06-06'),
-                        ('Isaque Cirino', 'f', 52, '1973-05-11'),
-                        ('Fernando Aragão', 'f', 41, '1984-06-19'),
-                        ('Beatriz Mendonça', 'm', 63, '1962-08-13'),
-                        ('Rebeca Cirino', 'o', 43, '1982-08-01'),
-                        ('Enrico Cunha', 'o', 26, '1999-06-10'),
-                        ('Melina da Rocha', 'm', 52, '1973-04-03'),
-                        ('Gabrielly Vargas', 'f', 18, '2007-08-28'),
-                        ('Gabrielly Monteiro', 'm', 46, '1979-06-11'),
-                        ('Anna Liz Ribeiro', 'o', 32, '1993-04-07'),
-                        ('Maria Isis Guerra', 'm', 37, '1988-05-16'),
-                        ('Vinicius Alves', 'f', 64, '1961-02-03'),
-                        ('Theodoro Carvalho', 'o', 50, '1975-06-28'),
-                        ('Emanuel Novais', 'm', 25, '2000-03-15'),
-                        ('João Gabriel Fernandes', 'f', 18, '2007-02-08'),
-                        ('Enzo Gabriel Aragão', 'm', 63, '1962-06-13'),
-                        ('Cecília Pereira', 'm', 53, '1972-04-20'),
-                        ('Isabella Siqueira', 'm', 19, '2006-01-02'),
-                        ('Daniela Marques', 'o', 41, '1984-09-04'),
-                        ('Rael Novais', 'm', 61, '1964-04-25'),
-                        ('João Felipe da Conceição', 'f', 54, '1971-01-16'),
-                        ('Breno Lima', 'f', 28, '1997-03-01'),
-                        ('Ayla Camargo', 'f', 22, '2003-05-07'),
-                        ('Henry Gabriel Vasconcelos', 'm', 61, '1964-04-12'),
-                        ('Srta. Mariana Novais', 'f', 50, '1975-01-04'),
-                        ('Anthony Gabriel Sá', 'm', 58, '1967-04-20'),
-                        ('Srta. Olívia Machado', 'm', 59, '1966-04-11'),
-                        ('Dra. Maria Machado', 'm', 68, '1957-11-23'),
-                        ('Dr. Nathan Fernandes', 'm', 29, '1996-03-19'),
-                        ('Juliana da Rocha', 'f', 27, '1998-08-09'),
-                        ('Bryan Camargo', 'm', 47, '1978-12-06'),
-                        ('Otto Correia', 'm', 47, '1978-11-23'),
-                        ('Oliver Sá', 'o', 35, '1990-08-26'),
-                        ('Marcelo Ferreira', 'm', 40, '1985-06-08'),
-                        ('Sr. Raul Campos', 'f', 65, '1960-08-24'),
-                        ('João Felipe Leão', 'm', 69, '1956-11-12'),
-                        ('Luara Nogueira', 'o', 68, '1957-12-05'),
-                        ('Lorenzo Nascimento', 'o', 23, '2002-10-18'),
-                        ('Vitor Gabriel Fonseca', 'f', 29, '1996-05-22'),
-                        ('Léo Cirino', 'm', 59, '1966-07-06'),
-                        ('Lara Pinto', 'o', 66, '1959-06-05'),
-                        ('Ravi Jesus', 'f', 38, '1987-11-13'),
-                        ('Carolina Fernandes', 'm', 68, '1957-10-18'),
-                        ('Gabriela Gonçalves', 'f', 19, '2006-06-15'),
-                        ('Matteo Aparecida', 'o', 51, '1974-10-15'),
-                        ('Arthur Gabriel Freitas', 'o', 31, '1994-04-14'),
-                        ('Cauã Sales', 'o', 22, '2003-04-06'),
-                        ('Lucas Dias', 'm', 31, '1994-11-02'),
-                        ('Vitor Gabriel Castro', 'o', 57, '1968-01-03'),
-                        ('Augusto Rios', 'm', 48, '1977-11-08'),
-                        ('Nicolas Freitas', 'f', 36, '1989-04-07'),
-                        ('Raul Borges', 'o', 27, '1998-08-03'),
-                        ('Sabrina Nunes', 'm', 26, '1999-03-13'),
-                        ('Manuella Abreu', 'm', 31, '1994-02-07'),
-                        ('Fernanda Garcia', 'f', 45, '1980-04-18'),
-                        ('Arthur Moraes', 'f', 28, '1997-03-05'),
-                        ('Luiz Fernando Ferreira', 'm', 45, '1980-04-06'),
-                        ('Dr. João Felipe Silveira', 'o', 59, '1966-07-16'),
-                        ('Oliver Ramos', 'f', 61, '1964-07-05'),
-                        ('Srta. Ana Barros', 'm', 27, '1998-06-04'),
-                        ('Dr. Valentim Novais', 'f', 37, '1988-08-26'),
-                        ('Maria Laura Lopes', 'o', 23, '2002-12-07'),
-                        ('Ester Lima', 'f', 46, '1979-06-22'),
-                        ('Emanuelly Borges', 'f', 43, '1982-01-16'),
-                        ('Benjamin Melo', 'f', 52, '1973-09-08'),
-                        ('Leonardo Freitas', 'o', 63, '1962-01-04'),
-                        ('Marcos Vinicius Correia', 'f', 35, '1990-09-24'),
-                        ('Davi Cunha', 'm', 30, '1995-02-14'),
-                        ('Sofia Farias', 'o', 28, '1997-09-12'),
-                        ('Dante Alves', 'm', 49, '1976-06-13'),
-                        ('Liam Barros', 'm', 35, '1990-02-09'),
-                        ('Dra. Alexia Rocha', 'o', 36, '1989-01-18'),
-                        ('Gael Fernandes', 'f', 59, '1966-03-11'),
-                        ('Léo Costa', 'o', 51, '1974-09-25'),
-                        ('Fernanda Mendonça', 'm', 22, '2003-10-28'),
-                        ('Amanda Moura', 'm', 61, '1964-01-18'),
-                        ('Ana Julia Farias', 'f', 34, '1991-03-27'),
-                        ('Leandro Dias', 'm', 33, '1992-06-10'),
-                        ('Vinícius Monteiro', 'f', 42, '1983-01-10'),
-                        ('Kaique Cavalcanti', 'o', 48, '1977-09-15'),
-                        ('Pedro Lucas Fernandes', 'm', 21, '2004-09-23'),
-                        ('Sra. Aylla Garcia', 'm', 39, '1986-05-21'),
-                        ('Renan da Cunha', 'f', 60, '1965-09-05'),
-                        ('Valentim Novaes', 'f', 69, '1956-02-01'),
-                        ('Cecilia Marques', 'o', 46, '1979-11-02'),
-                        ('Alana Sá', 'f', 28, '1997-03-14'),
-                        ('Ana Vitória Sá', 'o', 55, '1970-11-06'),
-                        ('Luara Barros', 'm', 24, '2001-08-05'),
-                        ('Vinícius Sampaio', 'f', 33, '1992-09-17'),
-                        ('Davi Lucca Sousa', 'f', 57, '1968-04-03'),
-                        ('Emanuel Vargas', 'o', 33, '1992-07-13'),
-                        ('Renan Santos', 'f', 29, '1996-04-26'),
-                        ('Dra. Helena Brito', 'm', 47, '1978-10-23'),
-                        ('João Felipe Nunes', 'f', 19, '2006-12-18'),
-                        ('Murilo Garcia', 'o', 63, '1962-03-28'),
-                        ('Sr. Murilo Gonçalves', 'o', 39, '1986-08-02'),
-                        ('Yuri Gonçalves', 'o', 57, '1968-12-23'),
-                        ('Luiz Felipe Araújo', 'f', 41, '1984-11-12');
+                            INSERT INTO cliente (nome, sexo, idade, nascimento) VALUES
+                                ('Asafe da Cruz', 'o', 23, '2002-03-06'),
+                                ('Hellena Sampaio', 'm', 35, '1990-05-10'),
+                                ('Aurora Santos', 'm', 66, '1959-06-06'),
+                                ('Isaque Cirino', 'f', 52, '1973-05-11'),
+                                ('Fernando Aragão', 'f', 41, '1984-06-19'),
+                                ('Beatriz Mendonça', 'm', 63, '1962-08-13'),
+                                ('Rebeca Cirino', 'o', 43, '1982-08-01'),
+                                ('Enrico Cunha', 'o', 26, '1999-06-10'),
+                                ('Melina da Rocha', 'm', 52, '1973-04-03'),
+                                ('Gabrielly Vargas', 'f', 18, '2007-08-28'),
+                                ('Gabrielly Monteiro', 'm', 46, '1979-06-11'),
+                                ('Anna Liz Ribeiro', 'o', 32, '1993-04-07'),
+                                ('Maria Isis Guerra', 'm', 37, '1988-05-16'),
+                                ('Vinicius Alves', 'f', 64, '1961-02-03'),
+                                ('Theodoro Carvalho', 'o', 50, '1975-06-28'),
+                                ('Emanuel Novais', 'm', 25, '2000-03-15'),
+                                ('João Gabriel Fernandes', 'f', 18, '2007-02-08'),
+                                ('Enzo Gabriel Aragão', 'm', 63, '1962-06-13'),
+                                ('Cecília Pereira', 'm', 53, '1972-04-20'),
+                                ('Isabella Siqueira', 'm', 19, '2006-01-02'),
+                                ('Daniela Marques', 'o', 41, '1984-09-04'),
+                                ('Rael Novais', 'm', 61, '1964-04-25'),
+                                ('João Felipe da Conceição', 'f', 54, '1971-01-16'),
+                                ('Breno Lima', 'f', 28, '1997-03-01'),
+                                ('Ayla Camargo', 'f', 22, '2003-05-07'),
+                                ('Henry Gabriel Vasconcelos', 'm', 61, '1964-04-12'),
+                                ('Srta. Mariana Novais', 'f', 50, '1975-01-04'),
+                                ('Anthony Gabriel Sá', 'm', 58, '1967-04-20'),
+                                ('Srta. Olívia Machado', 'm', 59, '1966-04-11'),
+                                ('Dra. Maria Machado', 'm', 68, '1957-11-23'),
+                                ('Dr. Nathan Fernandes', 'm', 29, '1996-03-19'),
+                                ('Juliana da Rocha', 'f', 27, '1998-08-09'),
+                                ('Bryan Camargo', 'm', 47, '1978-12-06'),
+                                ('Otto Correia', 'm', 47, '1978-11-23'),
+                                ('Oliver Sá', 'o', 35, '1990-08-26'),
+                                ('Marcelo Ferreira', 'm', 40, '1985-06-08'),
+                                ('Sr. Raul Campos', 'f', 65, '1960-08-24'),
+                                ('João Felipe Leão', 'm', 69, '1956-11-12'),
+                                ('Luara Nogueira', 'o', 68, '1957-12-05'),
+                                ('Lorenzo Nascimento', 'o', 23, '2002-10-18'),
+                                ('Vitor Gabriel Fonseca', 'f', 29, '1996-05-22'),
+                                ('Léo Cirino', 'm', 59, '1966-07-06'),
+                                ('Lara Pinto', 'o', 66, '1959-06-05'),
+                                ('Ravi Jesus', 'f', 38, '1987-11-13'),
+                                ('Carolina Fernandes', 'm', 68, '1957-10-18'),
+                                ('Gabriela Gonçalves', 'f', 19, '2006-06-15'),
+                                ('Matteo Aparecida', 'o', 51, '1974-10-15'),
+                                ('Arthur Gabriel Freitas', 'o', 31, '1994-04-14'),
+                                ('Cauã Sales', 'o', 22, '2003-04-06'),
+                                ('Lucas Dias', 'm', 31, '1994-11-02'),
+                                ('Vitor Gabriel Castro', 'o', 57, '1968-01-03'),
+                                ('Augusto Rios', 'm', 48, '1977-11-08'),
+                                ('Nicolas Freitas', 'f', 36, '1989-04-07'),
+                                ('Raul Borges', 'o', 27, '1998-08-03'),
+                                ('Sabrina Nunes', 'm', 26, '1999-03-13'),
+                                ('Manuella Abreu', 'm', 31, '1994-02-07'),
+                                ('Fernanda Garcia', 'f', 45, '1980-04-18'),
+                                ('Arthur Moraes', 'f', 28, '1997-03-05'),
+                                ('Luiz Fernando Ferreira', 'm', 45, '1980-04-06'),
+                                ('Dr. João Felipe Silveira', 'o', 59, '1966-07-16'),
+                                ('Oliver Ramos', 'f', 61, '1964-07-05'),
+                                ('Srta. Ana Barros', 'm', 27, '1998-06-04'),
+                                ('Dr. Valentim Novais', 'f', 37, '1988-08-26'),
+                                ('Maria Laura Lopes', 'o', 23, '2002-12-07'),
+                                ('Ester Lima', 'f', 46, '1979-06-22'),
+                                ('Emanuelly Borges', 'f', 43, '1982-01-16'),
+                                ('Benjamin Melo', 'f', 52, '1973-09-08'),
+                                ('Leonardo Freitas', 'o', 63, '1962-01-04'),
+                                ('Marcos Vinicius Correia', 'f', 35, '1990-09-24'),
+                                ('Davi Cunha', 'm', 30, '1995-02-14'),
+                                ('Sofia Farias', 'o', 28, '1997-09-12'),
+                                ('Dante Alves', 'm', 49, '1976-06-13'),
+                                ('Liam Barros', 'm', 35, '1990-02-09'),
+                                ('Dra. Alexia Rocha', 'o', 36, '1989-01-18'),
+                                ('Gael Fernandes', 'f', 59, '1966-03-11'),
+                                ('Léo Costa', 'o', 51, '1974-09-25'),
+                                ('Fernanda Mendonça', 'm', 22, '2003-10-28'),
+                                ('Amanda Moura', 'm', 61, '1964-01-18'),
+                                ('Ana Julia Farias', 'f', 34, '1991-03-27'),
+                                ('Leandro Dias', 'm', 33, '1992-06-10'),
+                                ('Vinícius Monteiro', 'f', 42, '1983-01-10'),
+                                ('Kaique Cavalcanti', 'o', 48, '1977-09-15'),
+                                ('Pedro Lucas Fernandes', 'm', 21, '2004-09-23'),
+                                ('Sra. Aylla Garcia', 'm', 39, '1986-05-21'),
+                                ('Renan da Cunha', 'f', 60, '1965-09-05'),
+                                ('Valentim Novaes', 'f', 69, '1956-02-01'),
+                                ('Cecilia Marques', 'o', 46, '1979-11-02'),
+                                ('Alana Sá', 'f', 28, '1997-03-14'),
+                                ('Ana Vitória Sá', 'o', 55, '1970-11-06'),
+                                ('Luara Barros', 'm', 24, '2001-08-05'),
+                                ('Vinícius Sampaio', 'f', 33, '1992-09-17'),
+                                ('Davi Lucca Sousa', 'f', 57, '1968-04-03'),
+                                ('Emanuel Vargas', 'o', 33, '1992-07-13'),
+                                ('Renan Santos', 'f', 29, '1996-04-26'),
+                                ('Dra. Helena Brito', 'm', 47, '1978-10-23'),
+                                ('João Felipe Nunes', 'f', 19, '2006-12-18'),
+                                ('Murilo Garcia', 'o', 63, '1962-03-28'),
+                                ('Sr. Murilo Gonçalves', 'o', 39, '1986-08-02'),
+                                ('Yuri Gonçalves', 'o', 57, '1968-12-23'),
+                                ('Luiz Felipe Araújo', 'f', 41, '1984-11-12');
+                        """,
+                """
+                        INSERT INTO `funcionario`
+                            (`nome`, `sexo`, `idade`, `cargo`,`salario`, `nascimento`)
+                        VALUES
+                            ('Ana Souza', 'f', 28, 'vendedor', 2500.00, '1997-03-15'),
+                            ('Bruno Lima', 'm', 32, 'vendedor', 2700.00, '1992-05-11'),
+                            ('Carlos Pereira', 'm', 26, 'vendedor', 2300.00, '1998-01-22'),
+                            ('Diana Costa', 'f', 30, 'vendedor', 2800.00, '1994-11-07'),
+                            ('Eduardo Rocha', 'm', 35, 'vendedor', 2600.00, '1989-09-16'),
+                            ('Fernanda Alves', 'f', 24, 'vendedor', 2200.00, '2000-07-23'),
+                            ('Gabriel Martins', 'm', 27, 'vendedor', 2400.00, '1996-12-12'),
+                            ('Helena Silva', 'f', 29, 'vendedor', 2500.00, '1995-04-04'),
+                            ('Igor Fernandes', 'm', 31, 'vendedor', 2600.00, '1993-08-17'),
+                            ('Juliana Oliveira', 'f', 34, 'vendedor', 2700.00, '1989-05-30'),
+                            ('Lucas Costa', 'm', 40, 'gerente', 5500.00, '1984-02-19'),
+                            ('Carlos Rocha', 'm', 50, 'CEO', 15000.00, '1974-10-05'),
+                            ('Mariana Lima', 'f', 38, 'supervisor', 4500.00, '1986-03-10'),
+                            ('Júlia Martins', 'f', 26, 'assistente', 2200.00, '1997-07-21'),
+                            ('Ricardo Silva', 'm', 29, 'assistente', 2300.00, '1994-05-14'),
+                            ('Patrícia Souza', 'f', 27, 'assistente', 2250.00, '1996-08-10');
+                            """,
+                """
+                          CREATE PROCEDURE sp_realizar_venda(
+                              IN p_id_vendedor INT,
+                              IN p_id_cliente INT,
+                              IN p_ids_produtos TEXT,
+                              IN p_qtds_produtos TEXT,
+                              OUT p_mensagem VARCHAR(255)
+                          )
+                          BEGIN
+                              DECLARE v_valor_total DECIMAL(10,2) DEFAULT 0;
+                              DECLARE v_id_produto INT;
+                              DECLARE v_qtd INT;
+                              DECLARE v_estoque INT;
+                              DECLARE v_valor_unit DECIMAL(10,2);
+
+                              DECLARE produtos TEXT;
+                              DECLARE quantidades TEXT;
+                              DECLARE prod_id TEXT;
+                              DECLARE qtd_val TEXT;
+
+                              IF NOT EXISTS (SELECT 1 FROM funcionario WHERE id = p_id_vendedor) THEN
+                                  SET p_mensagem = 'ERRO: Vendedor não encontrado.';
+                              ELSEIF NOT EXISTS (SELECT 1 FROM cliente WHERE id = p_id_cliente) THEN
+                                  SET p_mensagem = 'ERRO: Cliente não encontrado.';
+                              ELSE
+                                  erro: BEGIN
+                                      DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+                                      BEGIN
+                                          ROLLBACK;
+                                          SET p_mensagem = 'ERRO: Falha ao registrar venda.';
+                                      END;
+
+                                      START TRANSACTION;
+                                      SET produtos = p_ids_produtos;
+                                      SET quantidades = p_qtds_produtos;
+
+                                      -- Loop para todos os produtos, exceto o último
+                                      WHILE LOCATE(',', produtos) > 0 DO
+                                          SET prod_id = SUBSTRING_INDEX(produtos, ',', 1);
+                                          SET produtos = SUBSTRING(produtos, LOCATE(',', produtos) + 1);
+
+                                          SET qtd_val = SUBSTRING_INDEX(quantidades, ',', 1);
+                                          SET quantidades = SUBSTRING(quantidades, LOCATE(',', quantidades) + 1);
+
+                                          SET v_id_produto = CAST(prod_id AS UNSIGNED);
+                                          SET v_qtd = CAST(qtd_val AS UNSIGNED);
+
+                                          SELECT quantidade, valor INTO v_estoque, v_valor_unit
+                                          FROM produto WHERE id = v_id_produto;
+
+                                          IF v_estoque < v_qtd THEN
+                                              ROLLBACK;
+                                              SET p_mensagem = CONCAT('ERRO: Estoque insuficiente para o produto ID ', v_id_produto);
+                                              LEAVE erro;
+                                          END IF;
+
+                                          UPDATE produto SET quantidade = quantidade - v_qtd WHERE id = v_id_produto;
+                                          SET v_valor_total = v_valor_total + (v_valor_unit * v_qtd);
+                                      END WHILE;
+
+                                      -- Último produto
+                                      SET v_id_produto = CAST(produtos AS UNSIGNED);
+                                      SET v_qtd = CAST(quantidades AS UNSIGNED);
+
+                                      SELECT quantidade, valor INTO v_estoque, v_valor_unit
+                                      FROM produto WHERE id = v_id_produto;
+
+                                      IF v_estoque < v_qtd THEN
+                                          ROLLBACK;
+                                          SET p_mensagem = CONCAT('ERRO: Estoque insuficiente para o produto ID ', v_id_produto);
+                                      ELSE
+                                          UPDATE produto SET quantidade = quantidade - v_qtd WHERE id = v_id_produto;
+                                          SET v_valor_total = v_valor_total + (v_valor_unit * v_qtd);
+
+                                          -- Registra a venda na tabela venda (resumo único)
+                                          INSERT INTO venda (id_vendedor, id_cliente, id_produto, quantidade, data, valor)
+                                          VALUES (p_id_vendedor, p_id_cliente, v_id_produto, v_qtd, CURDATE(), v_valor_total);
+
+                                          COMMIT;
+                                          SET p_mensagem = 'Venda registrada com sucesso!';
+                                      END IF;
+                                  END;
+                              END IF;
+                          END;
+                        """,
+                """
+                        CREATE OR REPLACE VIEW vw_vendas_por_vendedor AS
+                        SELECT
+                          f.id AS vendedor_id,
+                          f.nome AS vendedor_nome,
+                          COUNT(v.id) AS vendas_realizadas,
+                          SUM(v.valor * v.quantidade) AS faturamento
+                        FROM funcionario f
+                        JOIN venda v ON v.id_vendedor = f.id
+                        GROUP BY f.id, f.nome;
+                """,
+                """
+                        CREATE OR REPLACE VIEW vw_vendas_por_produto AS
+                        SELECT
+                          p.id AS produto_id,
+                          p.nome AS produto_nome,
+                          SUM(v.quantidade) AS unidades_vendidas,
+                          SUM(v.valor * v.quantidade) AS receita_total
+                        FROM produto p
+                        JOIN venda v ON v.id_produto = p.id
+                        GROUP BY p.id, p.nome;
+                """,
+                """
+                        CREATE OR REPLACE VIEW vw_vendas_por_cliente AS
+                        SELECT
+                          c.id AS cliente_id,
+                          c.nome AS cliente_nome,
+                          COUNT(v.id) AS total_vendas,
+                          SUM(v.valor * v.quantidade) AS valor_total
+                        FROM cliente c
+                        JOIN venda v ON v.id_cliente = c.id
+                        GROUP BY c.id, c.nome;
                 """
 
         };
@@ -583,6 +722,75 @@ public class DatabaseManager {
 
         } catch (SQLException e) {
             System.out.println("Erro ao reajustar salários: " + e.getMessage());
+        }
+    }
+
+    public void exibirVendasPorCliente() {
+        String sql = "SELECT * FROM vw_vendas_por_cliente";
+
+        try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("=== Vendas por Cliente ===");
+            while (rs.next()) {
+                int id = rs.getInt("cliente_id");
+                String nome = rs.getString("cliente_nome");
+                int totalVendas = rs.getInt("total_vendas");
+                double valorTotal = rs.getDouble("valor_total");
+
+                System.out.printf("ID: %d | Nome: %s | Vendas: %d | Total: R$%.2f%n",
+                        id, nome, totalVendas, valorTotal);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao consultar vw_vendas_por_cliente: " + e.getMessage());
+        }
+    }
+
+    public void exibirVendasPorProduto() {
+        String sql = "SELECT * FROM vw_vendas_por_produto";
+
+        try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("=== Vendas por Produto ===");
+            while (rs.next()) {
+                int id = rs.getInt("produto_id");
+                String nome = rs.getString("produto_nome");
+                int unidades = rs.getInt("unidades_vendidas");
+                double receita = rs.getDouble("receita_total");
+
+                System.out.printf("ID: %d | Produto: %s | Unidades: %d | Receita: R$%.2f%n",
+                        id, nome, unidades, receita);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao consultar vw_vendas_por_produto: " + e.getMessage());
+        }
+    }
+
+    public void exibirVendasPorVendedor() {
+        String sql = "SELECT * FROM vw_vendas_por_vendedor";
+
+        try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("=== Vendas por Vendedor ===");
+            while (rs.next()) {
+                int id = rs.getInt("vendedor_id");
+                String nome = rs.getString("vendedor_nome");
+                int vendas = rs.getInt("vendas_realizadas");
+                double faturamento = rs.getDouble("faturamento");
+
+                System.out.printf("ID: %d | Vendedor: %s | Vendas: %d | Faturamento: R$%.2f%n",
+                        id, nome, vendas, faturamento);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao consultar vw_vendas_por_vendedor: " + e.getMessage());
         }
     }
 
