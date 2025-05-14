@@ -205,10 +205,11 @@ END$$
 
 DELIMITER ;
 ----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 DELIMITER $$
 
 CREATE TRIGGER trg_bonus_funcionario_vendedor
-AFTER INSERT ON venda
+AFTER UPDATE ON venda  -- Mudei para AFTER UPDATE
 FOR EACH ROW
 BEGIN
   DECLARE v_cargo VARCHAR(20);
@@ -216,70 +217,58 @@ BEGIN
   DECLARE v_total_bonus DECIMAL(10,2);
   DECLARE v_mensagem TEXT;
 
-  -- Verifica o cargo do funcionário que fez a venda
-  SELECT cargo INTO v_cargo
-  FROM funcionario
-  WHERE id = NEW.id_vendedor;  -- Usando 'id_vendedor' da tabela 'venda'
+  -- Só executa se o valor_total foi atualizado
+  IF NEW.valor_total <> OLD.valor_total THEN
+    -- Verifica o cargo do funcionário
+    SELECT cargo INTO v_cargo
+    FROM funcionario
+    WHERE id = NEW.id_vendedor;
 
-  -- Verifica se o cargo é vendedor e se a venda foi maior que 1000
-  IF v_cargo = 'vendedor' AND NEW.valor > 1000 THEN
-    SET v_bonus = NEW.valor * 0.05;
+    -- Verifica se é vendedor e se a venda foi maior que 1000
+    IF v_cargo = 'vendedor' AND NEW.valor_total > 1000 THEN
+      SET v_bonus = NEW.valor_total * 0.05;
 
-    -- Insere ou atualiza na tabela funcionarioespecial
-    IF NOT EXISTS (
-      SELECT 1 FROM funcionarioespecial WHERE id = NEW.id_vendedor
-    ) THEN
-      INSERT INTO funcionarioespecial (id, bonus)
-      VALUES (NEW.id_vendedor, v_bonus);
-    ELSE
-      UPDATE funcionarioespecial
-      SET bonus = bonus + v_bonus
-      WHERE id = NEW.id_vendedor;
+      -- Insere ou atualiza o bônus
+      IF NOT EXISTS (SELECT 1 FROM funcionarioespecial WHERE id = NEW.id_vendedor) THEN
+        INSERT INTO funcionarioespecial (id, bonus)
+        VALUES (NEW.id_vendedor, v_bonus);
+      ELSE
+        UPDATE funcionarioespecial
+        SET bonus = bonus + v_bonus
+        WHERE id = NEW.id_vendedor;
+      END IF;
+
+      -- Calcula o total de bônus (opcional)
+      SELECT SUM(bonus) INTO v_total_bonus FROM funcionarioespecial;
+      
+      SET v_mensagem = CONCAT('Bônus de R$', FORMAT(v_bonus, 2), 
+                             ' concedido ao vendedor ID ', NEW.id_vendedor);
+      SIGNAL SQLSTATE '01000' SET MESSAGE_TEXT = v_mensagem;
     END IF;
-
-    -- Soma todos os bônus da tabela funcionarioespecial
-    SELECT SUM(bonus) INTO v_total_bonus
-    FROM funcionarioespecial;
-
-    -- Monta a mensagem de aviso
-    SET v_mensagem = CONCAT('Total de bônus salarial acumulado: R$', FORMAT(v_total_bonus, 2));
-
-    -- Emite a mensagem (em nível de aviso)
-    SIGNAL SQLSTATE '01000'
-    SET MESSAGE_TEXT = v_mensagem;
   END IF;
 END$$
 
 DELIMITER ;
-
+--------------------------------------------------------------------------------------------------------
 DELIMITER $$
 
 CREATE TRIGGER trg_cashback_clienteespecial
-AFTER INSERT ON venda
+AFTER UPDATE ON venda  -- Mudei para AFTER UPDATE
 FOR EACH ROW
 BEGIN
     DECLARE cashback_valor DECIMAL(10,2);
-    DECLARE nome_cliente VARCHAR(100);
-    DECLARE sexo_cliente CHAR(1);
-    DECLARE idade_cliente INT;
 
-    -- Verifica se a compra foi superior a R$500
-    IF NEW.valor > 500.00 THEN
+    -- Só executa se o valor_total foi atualizado
+    IF NEW.valor_total <> OLD.valor_total AND NEW.valor_total > 500.00 THEN
         -- Calcula 2% do valor da compra
-        SET cashback_valor = NEW.valor * 0.02;
+        SET cashback_valor = NEW.valor_total * 0.02;
 
-        -- Busca os dados do cliente na tabela 'cliente'
-        SELECT nome, sexo, idade
-        INTO nome_cliente, sexo_cliente, idade_cliente
-        FROM cliente
-        WHERE id = NEW.id_cliente;
-
-        -- Se o cliente ainda não estiver na tabela clienteespecial, insere com cashback
-        IF NOT EXISTS (
-            SELECT 1 FROM clienteespecial WHERE id_cliente = NEW.id_cliente
-        ) THEN
+        -- Se o cliente não for especial, cria registro
+        IF NOT EXISTS (SELECT 1 FROM clienteespecial WHERE id_cliente = NEW.id_cliente) THEN
             INSERT INTO clienteespecial (id_cliente, nome, sexo, idade, cashback)
-            VALUES (NEW.id_cliente, nome_cliente, sexo_cliente, idade_cliente, cashback_valor);
+            SELECT id, nome, sexo, idade, cashback_valor
+            FROM cliente
+            WHERE id = NEW.id_cliente;
         ELSE
             -- Caso já exista, acumula o cashback
             UPDATE clienteespecial
