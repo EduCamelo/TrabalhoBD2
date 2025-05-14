@@ -117,8 +117,8 @@ public class App {
                                 System.out.println();
                                 System.out.print("Escreva uma das opções acima: ");
                                 String escolha = input.next();
-                                System.out.println("Escreva o percentual: ");
-                                int percente = input.nextInt();
+                                System.out.print("Escreva o percentual: ");
+                                double percente = input.nextDouble();
                                 DB.reajustarSalarios(escolha, percente);
                                 break;
                             case 8:
@@ -129,6 +129,9 @@ public class App {
                                 break;
                             case 10:
                                 DB.exibirVendasPorVendedor();
+                                break;
+                            case 11:
+                                DB.exibirEstatisticas();
                                 break;
 
                             default:
@@ -170,6 +173,7 @@ public class App {
         System.out.println("8.  Exibir Vendas por cliente");
         System.out.println("9.  Exibir vendas por produto");
         System.out.println("10. Exibir vendas por vendedor");
+        System.out.println("11. Exibir Estatisticas");
         System.out.println("0.  Sair do banco de dados");
         System.out.println();
         System.out.print("Escolha uma das opções: ");

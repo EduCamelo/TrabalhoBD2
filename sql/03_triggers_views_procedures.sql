@@ -1,5 +1,85 @@
 DELIMITER $$
+CREATE PROCEDURE estatisticas()
+BEGIN
+  DECLARE prod_top INT;
+  DECLARE prod_bot INT;
 
+  -- produto mais vendido
+  SELECT p.id INTO prod_top
+    FROM produto p
+    JOIN venda v ON v.id_produto = p.id
+    GROUP BY p.id
+    ORDER BY SUM(v.quantidade) DESC
+    LIMIT 1;
+  -- produto menos vendido
+  SELECT p.id INTO prod_bot
+    FROM produto p
+    JOIN venda v ON v.id_produto = p.id
+    GROUP BY p.id
+    ORDER BY SUM(v.quantidade) ASC
+    LIMIT 1;
+
+  -- 1) Mais vendido
+  SELECT 
+    p.nome              AS produto_mais_vendido,
+    SUM(v.quantidade)   AS qtd_total,
+    SUM(v.valor*v.quantidade) AS receita_mais_vendido
+  FROM venda v
+  JOIN produto p ON p.id = v.id_produto
+  WHERE p.id = prod_top
+  GROUP BY p.nome;
+
+  -- 2) Vendedor top do produto mais vendido
+  SELECT f.nome AS vendedor_top
+  FROM venda v
+  JOIN funcionario f ON f.id = v.id_vendedor
+  WHERE v.id_produto = prod_top
+  GROUP BY f.id
+  ORDER BY SUM(v.quantidade) DESC
+  LIMIT 1;
+
+  -- 3) Menos vendido
+  SELECT 
+    p.nome              AS produto_menos_vendido,
+    SUM(v.quantidade)   AS qtd_total,
+    SUM(v.valor*v.quantidade) AS receita_menos_vendido
+  FROM venda v
+  JOIN produto p ON p.id = v.id_produto
+  WHERE p.id = prod_bot
+  GROUP BY p.nome;
+
+  -- 4) Mês de maior e menor vendas do mais vendido
+  SELECT DATE_FORMAT(data, '%Y-%m') AS mes_produto_maisVendido,
+         SUM(quantidade) AS qtd_maior
+    FROM venda
+    WHERE id_produto = prod_top
+    GROUP BY mes_produto_maisVendido
+    ORDER BY qtd_maior DESC LIMIT 1;
+  SELECT DATE_FORMAT(data, '%Y-%m') AS mes_maisVendido,
+         SUM(quantidade) AS qtd_menor
+    FROM venda
+    WHERE id_produto = prod_top
+    GROUP BY mes_maisVendido
+    ORDER BY qtd_menor ASC LIMIT 1;
+
+  -- 5) Mês de maior e menor vendas do menos vendido
+  SELECT DATE_FORMAT(data, '%Y-%m') AS mes_produto_menosVendido,
+         SUM(quantidade) AS qtd_maior
+    FROM venda
+    WHERE id_produto = prod_bot
+    GROUP BY mes_produto_menosVendido
+    ORDER BY qtd_maior DESC LIMIT 1;
+  SELECT DATE_FORMAT(data, '%Y-%m') AS mes_menosVendido,
+         SUM(quantidade) AS qtd_menor
+    FROM venda
+    WHERE id_produto = prod_bot
+    GROUP BY mes_menosVendido
+    ORDER BY qtd_menor ASC LIMIT 1;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
 CREATE PROCEDURE sp_realizar_venda(
     IN p_id_vendedor INT,
     IN p_id_cliente INT,

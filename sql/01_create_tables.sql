@@ -68,13 +68,4 @@ CREATE TABLE venda (
     FOREIGN KEY (id_cliente) REFERENCES cliente(id)
 );
 
-CREATE TABLE item_venda (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    id_venda INT,
-    id_produto INT,
-    quantidade INT,
-    preco_unitario DECIMAL(10,2),
-    FOREIGN KEY (id_venda) REFERENCES venda(id),
-    FOREIGN KEY (id_produto) REFERENCES produto(id)
-);
 

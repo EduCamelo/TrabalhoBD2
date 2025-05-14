@@ -275,28 +275,30 @@ public class DatabaseManager {
                         END
                         """,
                 """
-                        INSERT INTO produto (nome, quantidade, descricao, valor) VALUES
-                        ('Dolores Maiores', 170, 'Magnam quae commodi deleniti eveniet quis.', 3919.54),
-                        ('Accusamus Fugit', 194, 'Doloribus nostrum aliquid quisquam iure architecto illum.', 4577.77),
-                        ('Non Debitis', 55, 'Cumque mollitia deserunt totam beatae.', 3355.1),
-                        ('Neque Eum', 82, 'Blanditiis omnis minus adipisci velit earum.', 3988.57),
-                        ('Eius Deserunt', 129, 'Facere minus aut.', 118.46),
-                        ('Optio Nemo', 173, 'Magni in atque cum.', 3221.75),
-                        ('Ipsa Aliquam', 145, 'Perferendis neque at aut dicta similique magnam.', 2853.15),
-                        ('Expedita Odio', 150, 'Dolor quo quidem sunt sequi quo tenetur.', 4478.12),
-                        ('Maiores Maxime', 157, 'Veritatis eligendi tempora quisquam.', 3995.8),
-                        ('Animi Dignissimos', 23, 'Qui deleniti esse quaerat ex.', 2000.86),
-                        ('Illum Eum', 55, 'Rerum minima quidem dignissimos autem.', 522.56),
-                        ('Sed Voluptate', 200, 'Magnam in eligendi sunt nesciunt perspiciatis dolorum.', 1157.18),
-                        ('Voluptatum Ad', 171, 'Quidem maxime dignissimos assumenda adipisci ex nihil.', 914.13),
-                        ('Quaerat Nemo', 18, 'Esse architecto sequi illo.', 628.55),
-                        ('Dolorum In', 117, 'Voluptas quibusdam velit corrupti voluptas rem repellendus.', 3791.81),
-                        ('Quia Porro', 196, 'Ea est optio animi natus voluptas blanditiis.', 2763.93),
-                        ('Ut Maiores', 89, 'Hic quo sequi ut.', 2129.96),
-                        ('Nisi Doloremque', 103, 'Nihil impedit cupiditate molestias dicta odio animi.', 980.19),
-                        ('Nihil Quae', 136, 'Illo corrupti reiciendis.', 3657.16),
-                        ('Similique Facere', 174, 'Non perspiciatis asperiores accusantium unde odit architecto doloremque.', 4571.76);
-                        """,
+                                              INSERT INTO `produto`
+                        (`nome`, `quantidade`, `descricao`, `valor`)
+                        VALUES
+                        ('Console PlayStation 5', 100, 'Console de videogame de última geração, com 1TB de armazenamento e jogos exclusivos.', 4999.99),
+                        ('Xbox Series X', 80, 'Console de videogame da Microsoft, 1TB de armazenamento e compatível com jogos de alta performance.', 4999.00),
+                        ('Nintendo Switch', 120, 'Console híbrido portátil e de mesa, com diversos jogos exclusivos.', 2999.99),
+                        ('Controle PlayStation DualSense', 150, 'Controle sem fio para PlayStation 5, com feedback tátil e gatilhos adaptativos.', 599.00),
+                        ('Controle Xbox Series X', 150, 'Controle sem fio para Xbox Series X, com design ergonômico e nova tecnologia.', 499.00),
+                        ('Fone de Ouvido Gaming HyperX', 200, 'Fone de ouvido para jogos com som de alta qualidade e microfone ajustável.', 299.99),
+                        ('Teclado Mecânico RGB Corsair', 180, 'Teclado mecânico com retroiluminação RGB e teclas programáveis para jogos.', 699.00),
+                        ('Mouse Gamer Logitech G502', 170, 'Mouse gamer com sensor de alta precisão e personalização de botões.', 249.90),
+                        ('Monitor Gamer Samsung 24"', 90, 'Monitor de 24 polegadas com taxa de atualização de 144Hz e resolução Full HD.', 799.00),
+                        ('Mousepad Grande para Gamer', 250, 'Mousepad de alta qualidade com bordas reforçadas e superfície suave.', 99.99),
+                        ('Cadeira Gamer DXRacer', 30, 'Cadeira ergonômica projetada para gamers, com ajuste de altura e apoio lombar.', 1299.00),
+                        ('HD Externo Seagate 1TB', 100, 'Disco rígido externo de 1TB para armazenamento de jogos e dados.', 389.90),
+                        ('SSD Kingston 512GB', 150, 'SSD de alta velocidade para upgrade de performance em PCs e consoles.', 379.00),
+                        ('Webcam Logitech C920', 130, 'Webcam Full HD para streamings e videoconferências.', 399.00),
+                        ('Microfone Condensador Blue Yeti', 80, 'Microfone de alta qualidade para gravações e transmissões ao vivo.', 799.00),
+                        ('Fonte Corsair 750W', 60, 'Fonte de alimentação de 750W para computadores gamer e high performance.', 499.00),
+                        ('Gabinete Gamer NZXT', 50, 'Gabinete para PC com boa ventilação e compatibilidade com placas de vídeo de última geração.', 699.00),
+                        ('Placa de Vídeo NVIDIA GeForce RTX 3070', 40, 'Placa de vídeo para jogos e renderização de alta performance.', 4999.00),
+                        ('Teclado Mecânico Razer BlackWidow', 60, 'Teclado mecânico para gamers com switches verdes e retroiluminação RGB.', 999.00),
+                        ('Carregador de Celular Anker PowerCore 20000mAh', 300, 'Carregador portátil com 20000mAh, ideal para manter seu dispositivo carregado durante o dia todo.', 199.90);
+                                                """,
                 """
                             INSERT INTO cliente (nome, sexo, idade, nascimento) VALUES
                                 ('Asafe da Cruz', 'o', 23, '2002-03-06'),
@@ -400,6 +402,7 @@ public class DatabaseManager {
                                 ('Yuri Gonçalves', 'o', 57, '1968-12-23'),
                                 ('Luiz Felipe Araújo', 'f', 41, '1984-11-12');
                         """,
+
                 """
                         INSERT INTO `funcionario`
                             (`nome`, `sexo`, `idade`, `cargo`,`salario`, `nascimento`)
@@ -421,6 +424,85 @@ public class DatabaseManager {
                             ('Ricardo Silva', 'm', 29, 'assistente', 2300.00, '1994-05-14'),
                             ('Patrícia Souza', 'f', 27, 'assistente', 2250.00, '1996-08-10');
                             """,
+                """
+                        CREATE PROCEDURE estatisticas()
+                        BEGIN
+                          DECLARE prod_top INT;
+                          DECLARE prod_bot INT;
+
+                          -- produto mais vendido
+                          SELECT p.id INTO prod_top
+                            FROM produto p
+                            JOIN venda v ON v.id_produto = p.id
+                            GROUP BY p.id
+                            ORDER BY SUM(v.quantidade) DESC
+                            LIMIT 1;
+                          -- produto menos vendido
+                          SELECT p.id INTO prod_bot
+                            FROM produto p
+                            JOIN venda v ON v.id_produto = p.id
+                            GROUP BY p.id
+                            ORDER BY SUM(v.quantidade) ASC
+                            LIMIT 1;
+
+                          -- 1) Mais vendido
+                          SELECT
+                            p.nome              AS produto_mais_vendido,
+                            SUM(v.quantidade)   AS qtd_total,
+                            SUM(v.valor*v.quantidade) AS receita_mais_vendido
+                          FROM venda v
+                          JOIN produto p ON p.id = v.id_produto
+                          WHERE p.id = prod_top
+                          GROUP BY p.nome;
+
+                          -- 2) Vendedor top do produto mais vendido
+                          SELECT f.nome AS vendedor_top
+                          FROM venda v
+                          JOIN funcionario f ON f.id = v.id_vendedor
+                          WHERE v.id_produto = prod_top
+                          GROUP BY f.id
+                          ORDER BY SUM(v.quantidade) DESC
+                          LIMIT 1;
+
+                          -- 3) Menos vendido
+                          SELECT
+                            p.nome              AS produto_menos_vendido,
+                            SUM(v.quantidade)   AS qtd_total,
+                            SUM(v.valor*v.quantidade) AS receita_menos_vendido
+                          FROM venda v
+                          JOIN produto p ON p.id = v.id_produto
+                          WHERE p.id = prod_bot
+                          GROUP BY p.nome;
+
+                          -- 4) Mês de maior e menor vendas do mais vendido
+                          SELECT DATE_FORMAT(data, '%Y-%m') AS mes_produto_maisVendido,
+                                 SUM(quantidade) AS qtd_maior
+                            FROM venda
+                            WHERE id_produto = prod_top
+                            GROUP BY mes_produto_maisVendido
+                            ORDER BY qtd_maior DESC LIMIT 1;
+                          SELECT DATE_FORMAT(data, '%Y-%m') AS mes_maisVendido,
+                                 SUM(quantidade) AS qtd_menor
+                            FROM venda
+                            WHERE id_produto = prod_top
+                            GROUP BY mes_maisVendido
+                            ORDER BY qtd_menor ASC LIMIT 1;
+
+                          -- 5) Mês de maior e menor vendas do menos vendido
+                          SELECT DATE_FORMAT(data, '%Y-%m') AS mes_produto_menosVendido,
+                                 SUM(quantidade) AS qtd_maior
+                            FROM venda
+                            WHERE id_produto = prod_bot
+                            GROUP BY mes_produto_menosVendido
+                            ORDER BY qtd_maior DESC LIMIT 1;
+                          SELECT DATE_FORMAT(data, '%Y-%m') AS mes_menosVendido,
+                                 SUM(quantidade) AS qtd_menor
+                            FROM venda
+                            WHERE id_produto = prod_bot
+                            GROUP BY mes_menosVendido
+                            ORDER BY qtd_menor ASC LIMIT 1;
+                        END
+                                                            """,
                 """
                           CREATE PROCEDURE sp_realizar_venda(
                               IN p_id_vendedor INT,
@@ -507,38 +589,50 @@ public class DatabaseManager {
                           END;
                         """,
                 """
-                        CREATE OR REPLACE VIEW vw_vendas_por_vendedor AS
-                        SELECT
-                          f.id AS vendedor_id,
-                          f.nome AS vendedor_nome,
-                          COUNT(v.id) AS vendas_realizadas,
-                          SUM(v.valor * v.quantidade) AS faturamento
-                        FROM funcionario f
-                        JOIN venda v ON v.id_vendedor = f.id
-                        GROUP BY f.id, f.nome;
-                """,
+                                CREATE OR REPLACE VIEW vw_vendas_por_vendedor AS
+                                SELECT
+                                  f.id AS vendedor_id,
+                                  f.nome AS vendedor_nome,
+                                  COUNT(v.id) AS vendas_realizadas,
+                                  SUM(v.valor * v.quantidade) AS faturamento
+                                FROM funcionario f
+                                JOIN venda v ON v.id_vendedor = f.id
+                                GROUP BY f.id, f.nome;
+                        """,
                 """
-                        CREATE OR REPLACE VIEW vw_vendas_por_produto AS
-                        SELECT
-                          p.id AS produto_id,
-                          p.nome AS produto_nome,
-                          SUM(v.quantidade) AS unidades_vendidas,
-                          SUM(v.valor * v.quantidade) AS receita_total
-                        FROM produto p
-                        JOIN venda v ON v.id_produto = p.id
-                        GROUP BY p.id, p.nome;
-                """,
+                                CREATE OR REPLACE VIEW vw_vendas_por_produto AS
+                                SELECT
+                                  p.id AS produto_id,
+                                  p.nome AS produto_nome,
+                                  SUM(v.quantidade) AS unidades_vendidas,
+                                  SUM(v.valor * v.quantidade) AS receita_total
+                                FROM produto p
+                                JOIN venda v ON v.id_produto = p.id
+                                GROUP BY p.id, p.nome;
+                        """,
                 """
-                        CREATE OR REPLACE VIEW vw_vendas_por_cliente AS
-                        SELECT
-                          c.id AS cliente_id,
-                          c.nome AS cliente_nome,
-                          COUNT(v.id) AS total_vendas,
-                          SUM(v.valor * v.quantidade) AS valor_total
-                        FROM cliente c
-                        JOIN venda v ON v.id_cliente = c.id
-                        GROUP BY c.id, c.nome;
+                                                        INSERT INTO `venda`
+                        ( `id`,`id_vendedor`,`id_cliente`,`id_produto`,`quantidade` ,`data`, `valor`)
+                        VALUES
+                        (1, 1, 1, 1, 2, '2025-01-01', 200.00),
+                        (2, 2, 2, 3, 3, '2025-02-02', 300.00),
+                        (3, 3, 3, 4, 4, '2025-03-03', 400.00),
+                        (4, 3, 4, 5, 5, '2025-04-04', 500.00),
+                        (5, 3, 5, 6, 6, '2025-05-05', 600.00),
+                        (6, 3, 6, 7, 7, '2025-06-06', 700.00);
+
+                                                        """,
                 """
+                                CREATE OR REPLACE VIEW vw_vendas_por_cliente AS
+                                SELECT
+                                  c.id AS cliente_id,
+                                  c.nome AS cliente_nome,
+                                  COUNT(v.id) AS total_vendas,
+                                  SUM(v.valor * v.quantidade) AS valor_total
+                                FROM cliente c
+                                JOIN venda v ON v.id_cliente = c.id
+                                GROUP BY c.id, c.nome;
+                        """
 
         };
 
@@ -791,6 +885,118 @@ public class DatabaseManager {
 
         } catch (SQLException e) {
             System.out.println("Erro ao consultar vw_vendas_por_vendedor: " + e.getMessage());
+        }
+    }
+
+    public void exibirEstatisticas() {
+        String sql = "{call estatisticas()}";
+
+        try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
+                CallableStatement stmt = conn.prepareCall(sql)) {
+
+            boolean hasResults = stmt.execute();
+            System.out.println("=== Estatísticas ===");
+
+            // Processar primeiro resultado: Produto mais vendido
+            if (hasResults) {
+                try (ResultSet rs = stmt.getResultSet()) {
+                    if (rs.next()) {
+                        String produtoMaisVendido = rs.getString("produto_mais_vendido");
+                        int qtdTotal = rs.getInt("qtd_total");
+                        double receita = rs.getDouble("receita_mais_vendido");
+                        System.out.printf("Produto mais vendido: Nome: %s, Quantidade: %d, Receita: R$%.2f%n",
+                                produtoMaisVendido, qtdTotal, receita);
+                    }
+                }
+                hasResults = stmt.getMoreResults();
+            }
+
+            // Processar segundo resultado: Vendedor top do produto mais vendido
+            if (hasResults) {
+                try (ResultSet rs = stmt.getResultSet()) {
+                    if (rs.next()) {
+                        String vendedorTop = rs.getString("vendedor_top");
+                        System.out.printf("Vendedor top do produto mais vendido: %s%n", vendedorTop);
+                    }
+                }
+                hasResults = stmt.getMoreResults();
+            }
+
+            // Processar terceiro resultado: Produto menos vendido
+            if (hasResults) {
+                try (ResultSet rs = stmt.getResultSet()) {
+                    if (rs.next()) {
+                        String produtoMenosVendido = rs.getString("produto_menos_vendido");
+                        int qtdTotal = rs.getInt("qtd_total");
+                        double receita = rs.getDouble("receita_menos_vendido");
+                        System.out.printf("Produto menos vendido: Nome: %s, Quantidade: %d, Receita: R$%.2f%n",
+                                produtoMenosVendido, qtdTotal, receita);
+                    }
+                }
+                hasResults = stmt.getMoreResults();
+            }
+
+            // Processar quarto e quinto resultados: Meses do mais vendido
+            String mesMaiorMaisVendido = "N/A";
+            int qtdMaiorMais = 0;
+            String mesMenorMaisVendido = "N/A";
+            int qtdMenorMais = 0;
+
+            if (hasResults) {
+                try (ResultSet rs = stmt.getResultSet()) {
+                    if (rs.next()) {
+                        mesMaiorMaisVendido = rs.getString("mes_produto_maisVendido");
+                        qtdMaiorMais = rs.getInt("qtd_maior");
+                    }
+                }
+                hasResults = stmt.getMoreResults();
+            }
+
+            if (hasResults) {
+                try (ResultSet rs = stmt.getResultSet()) {
+                    if (rs.next()) {
+                        mesMenorMaisVendido = rs.getString("mes_maisVendido");
+                        qtdMenorMais = rs.getInt("qtd_menor");
+                    }
+                }
+                hasResults = stmt.getMoreResults();
+            }
+
+            System.out.println("Meses de maior/menor vendas do mais vendido:");
+            System.out.printf("Mês (maior): %s, Quantidade: %d%n", mesMaiorMaisVendido, qtdMaiorMais);
+            System.out.printf("Mês (menor): %s, Quantidade: %d%n", mesMenorMaisVendido, qtdMenorMais);
+
+            // Processar sexto e sétimo resultados: Meses do menos vendido
+            String mesMaiorMenosVendido = "N/A";
+            int qtdMaiorMenos = 0;
+            String mesMenorMenosVendido = "N/A";
+            int qtdMenorMenos = 0;
+
+            if (hasResults) {
+                try (ResultSet rs = stmt.getResultSet()) {
+                    if (rs.next()) {
+                        mesMaiorMenosVendido = rs.getString("mes_produto_menosVendido");
+                        qtdMaiorMenos = rs.getInt("qtd_maior");
+                    }
+                }
+                hasResults = stmt.getMoreResults();
+            }
+
+            if (hasResults) {
+                try (ResultSet rs = stmt.getResultSet()) {
+                    if (rs.next()) {
+                        mesMenorMenosVendido = rs.getString("mes_menosVendido");
+                        qtdMenorMenos = rs.getInt("qtd_menor");
+                    }
+                }
+            }
+
+            System.out.println("Meses de maior/menor vendas do menos vendido:");
+            System.out.printf("Mês (maior): %s, Quantidade: %d%n", mesMaiorMenosVendido, qtdMaiorMenos);
+            System.out.printf("Mês (menor): %s, Quantidade: %d%n", mesMenorMenosVendido, qtdMenorMenos);
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao executar a procedure estatisticas: " + e.getMessage());
         }
     }
 
