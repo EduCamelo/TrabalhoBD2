@@ -102,6 +102,24 @@ public class App {
                                 int quantidade = input.nextInt();
 
                                 DB.realizarVenda(idVendedor, idCliente, idProduto, quantidade);
+                                DB.limparClientesComCashbackZero();
+                                break;
+
+                            case 6:
+                                DB.sortearCliente();
+                                break;
+                            case 7:
+                                System.out.println();
+                                input.nextLine();
+                                System.out.println("1 - vendedor");
+                                System.out.println("2 - gerente");
+                                System.out.println("3 - CEO");
+                                System.out.println();
+                                System.out.print("Escreva uma das opções acima: ");
+                                String escolha = input.next();
+                                System.out.println("Escreva o percentual: ");
+                                int percente = input.nextInt();
+                                DB.reajustarSalarios(escolha, percente);
                                 break;
                             default:
                                 break;
@@ -137,6 +155,8 @@ public class App {
         System.out.println("3. Inserir novo cliente");
         System.out.println("4. Inserir novo produto");
         System.out.println("5. Fazer uma venda");
+        System.out.println("6. Sortear cliente");
+        System.out.println("7. Reajustar salários");
         System.out.println("0. Sair do banco de dados");
         System.out.println();
         System.out.print("Escolha uma das opções: ");

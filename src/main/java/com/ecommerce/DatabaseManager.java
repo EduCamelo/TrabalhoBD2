@@ -4,8 +4,10 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 public class DatabaseManager {
 
@@ -104,193 +106,184 @@ public class DatabaseManager {
     }
 
     public static void criarTabelas() {
-        String sql = """
-                    -- Tabelas principais
-                    CREATE TABLE IF NOT EXISTS cliente (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        nome VARCHAR(255) NOT NULL,
-                        sexo ENUM('m', 'f', 'o') NOT NULL,
-                        idade INT NOT NULL,
-                        nascimento DATE NOT NULL
-                    );
+        String[] comandos = {
+                // Tabelas principais
+                """
+                        CREATE TABLE IF NOT EXISTS cliente (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            nome VARCHAR(255) NOT NULL,
+                            sexo ENUM('m', 'f', 'o') NOT NULL,
+                            idade INT NOT NULL,
+                            nascimento DATE NOT NULL
+                        )
+                        """,
 
-                    CREATE TABLE IF NOT EXISTS funcionario (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        nome VARCHAR(255) NOT NULL,
-                        idade INT NOT NULL,
-                        sexo ENUM('m', 'f', 'o') NOT NULL,
-                        cargo ENUM('vendedor', 'gerente', 'CEO', 'assistente', 'supervisor') NOT NULL,
-                        salario DECIMAL(10,2) NOT NULL,
-                        nascimento DATE NOT NULL
-                    );
+                """
+                        CREATE TABLE IF NOT EXISTS funcionario (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            nome VARCHAR(255) NOT NULL,
+                            idade INT NOT NULL,
+                            sexo ENUM('m', 'f', 'o') NOT NULL,
+                            cargo ENUM('vendedor', 'gerente', 'CEO', 'assistente', 'supervisor') NOT NULL,
+                            salario DECIMAL(10,2) NOT NULL,
+                            nascimento DATE NOT NULL
+                        )
+                        """,
 
-                    CREATE TABLE IF NOT EXISTS produto (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        nome VARCHAR(255) NOT NULL,
-                        quantidade INT NOT NULL,
-                        descricao TEXT NOT NULL,
-                        valor DECIMAL(10,2) NOT NULL
-                    );
+                """
+                        CREATE TABLE IF NOT EXISTS produto (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            nome VARCHAR(255) NOT NULL,
+                            quantidade INT NOT NULL,
+                            descricao TEXT NOT NULL,
+                            valor DECIMAL(10,2) NOT NULL
+                        )
+                        """,
 
-                    CREATE TABLE IF NOT EXISTS venda (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        id_vendedor INT NOT NULL,
-                        id_cliente INT NOT NULL,
-                        quantidade INT NOT NULL,
-                        id_produto INT NOT NULL,
-                        data DATE NOT NULL,
-                        valor DECIMAL(10,2) GENERATED ALWAYS AS (quantidade * (SELECT valor FROM produto WHERE produto.id = id_produto)) STORED,
-                        FOREIGN KEY (id_vendedor) REFERENCES funcionario(id) ON UPDATE CASCADE,
-                        FOREIGN KEY (id_cliente) REFERENCES cliente(id) ON UPDATE CASCADE,
-                        FOREIGN KEY (id_produto) REFERENCES produto(id) ON UPDATE CASCADE
-                    );
+                """
+                        CREATE TABLE IF NOT EXISTS venda (
+                            id INT AUTO_INCREMENT PRIMARY KEY,
+                            id_vendedor INT NOT NULL,
+                            id_cliente INT NOT NULL,
+                            id_produto INT NOT NULL,
+                            quantidade INT NOT NULL,
+                            data DATE NOT NULL,
+                            valor DECIMAL(10,2),
+                            FOREIGN KEY (id_vendedor) REFERENCES funcionario(id) ON UPDATE CASCADE,
+                            FOREIGN KEY (id_cliente) REFERENCES cliente(id) ON UPDATE CASCADE,
+                            FOREIGN KEY (id_produto) REFERENCES produto(id) ON UPDATE CASCADE
+                        )
+                        """,
 
-                    -- Tabelas auxiliares
-                    CREATE TABLE IF NOT EXISTS funcionarioespecial (
-                        id INT PRIMARY KEY,
-                        bonus DECIMAL(10,2) NOT NULL
-                    );
+                """
+                        CREATE TABLE IF NOT EXISTS funcionarioespecial (
+                            id INT PRIMARY KEY,
+                            bonus DECIMAL(10,2) NOT NULL
+                        )
+                        """,
 
-                    CREATE TABLE IF NOT EXISTS clienteespecial (
-                        id_cliente INT PRIMARY KEY,
-                        nome VARCHAR(255),
-                        sexo ENUM('m', 'f', 'o'),
-                        idade INT,
-                        cashback DECIMAL(10,2)
-                    );
-                """;
+                """
+                        CREATE TABLE IF NOT EXISTS clienteespecial (
+                            id_cliente INT PRIMARY KEY,
+                            nome VARCHAR(255),
+                            sexo ENUM('m', 'f', 'o'),
+                            idade INT,
+                            cashback DECIMAL(10,2)
+                        )
+                        """,
 
-        String procedure = """
-                    DROP PROCEDURE IF EXISTS sp_realizar_venda;
-                    DELIMITER //
-                    CREATE PROCEDURE sp_realizar_venda(
-                        IN p_id_vendedor INT,
-                        IN p_id_cliente INT,
-                        IN p_id_produto INT,
-                        IN p_quantidade INT,
-                        OUT p_mensagem VARCHAR(255)
-                    )
-                    BEGIN
-                        DECLARE v_estoque_atual INT;
-                        DECLARE v_valor_produto DECIMAL(10,2);
-                        DECLARE v_existe_produto BOOLEAN;
-                        DECLARE v_existe_vendedor BOOLEAN;
-                        DECLARE v_existe_cliente BOOLEAN;
-
-                        SELECT COUNT(*) INTO v_existe_produto FROM produto WHERE id = p_id_produto;
-                        SELECT COUNT(*) INTO v_existe_vendedor FROM funcionario WHERE id = p_id_vendedor;
-                        SELECT COUNT(*) INTO v_existe_cliente FROM cliente WHERE id = p_id_cliente;
-
-                        IF v_existe_produto = 0 THEN
-                            SET p_mensagem = 'ERRO: Produto não encontrado.';
-                        ELSEIF v_existe_vendedor = 0 THEN
-                            SET p_mensagem = 'ERRO: Vendedor não encontrado.';
-                        ELSEIF v_existe_cliente = 0 THEN
-                            SET p_mensagem = 'ERRO: Cliente não encontrado.';
-                        ELSE
-                            SELECT quantidade, valor INTO v_estoque_atual, v_valor_produto
-                            FROM produto
-                            WHERE id = p_id_produto;
-
-                            IF p_quantidade <= 0 THEN
-                                SET p_mensagem = 'ERRO: Quantidade deve ser maior que zero.';
-                            ELSEIF v_estoque_atual < p_quantidade THEN
-                                SET p_mensagem = CONCAT('ERRO: Estoque insuficiente. Disponível: ', v_estoque_atual);
-                            ELSE
-                                START TRANSACTION;
-
-                                INSERT INTO venda (id_vendedor, id_cliente, id_produto, quantidade, data)
-                                VALUES (p_id_vendedor, p_id_cliente, p_id_produto, p_quantidade, CURDATE());
-
-                                UPDATE produto
-                                SET quantidade = quantidade - p_quantidade
-                                WHERE id = p_id_produto;
-
-                                SET p_mensagem = 'Venda registrada com sucesso!';
-                                COMMIT;
-                            END IF;
-                        END IF;
-                    END //
-                    DELIMITER ;
-                """;
-
-        String triggers = """
-                    DELIMITER $$
-                    CREATE TRIGGER trg_bonus_funcionario_vendedor
-                    AFTER INSERT ON venda
-                    FOR EACH ROW
-                    BEGIN
-                      DECLARE v_cargo VARCHAR(20);
-                      DECLARE v_bonus DECIMAL(10,2);
-                      DECLARE v_total_bonus DECIMAL(10,2);
-                      DECLARE v_mensagem TEXT;
-
-                      SELECT cargo INTO v_cargo
-                      FROM funcionario
-                      WHERE id = NEW.id_vendedor;
-
-                      IF v_cargo = 'vendedor' AND NEW.valor > 1000 THEN
-                        SET v_bonus = NEW.valor * 0.05;
-
-                        IF NOT EXISTS (
-                          SELECT 1 FROM funcionarioespecial WHERE id = NEW.id_vendedor
-                        ) THEN
-                          INSERT INTO funcionarioespecial (id, bonus)
-                          VALUES (NEW.id_vendedor, v_bonus);
-                        ELSE
-                          UPDATE funcionarioespecial
-                          SET bonus = bonus + v_bonus
-                          WHERE id = NEW.id_vendedor;
-                        END IF;
-
-                        SELECT SUM(bonus) INTO v_total_bonus
-                        FROM funcionarioespecial;
-
-                        SET v_mensagem = CONCAT('Total de bônus salarial acumulado: R$', FORMAT(v_total_bonus, 2));
-                        SIGNAL SQLSTATE '01000'
-                        SET MESSAGE_TEXT = v_mensagem;
-                      END IF;
-                    END $$
-
-                    CREATE TRIGGER trg_cashback_clienteespecial
-                    AFTER INSERT ON venda
-                    FOR EACH ROW
-                    BEGIN
-                        DECLARE cashback_valor DECIMAL(10,2);
-                        DECLARE nome_cliente VARCHAR(100);
-                        DECLARE sexo_cliente CHAR(1);
-                        DECLARE idade_cliente INT;
-
-                        IF NEW.valor > 500.00 THEN
-                            SET cashback_valor = NEW.valor * 0.02;
-
-                            SELECT nome, sexo, idade
-                            INTO nome_cliente, sexo_cliente, idade_cliente
+                // Procedure: sp_sortear_cliente
+                "DROP PROCEDURE IF EXISTS sp_sortear_cliente",
+                """
+                        CREATE PROCEDURE sp_sortear_cliente(
+                            OUT p_cliente_id INT,
+                            OUT p_cliente_nome VARCHAR(255),
+                            OUT p_valor_voucher DECIMAL(10,2)
+                        )
+                        BEGIN
+                            DECLARE v_eh_especial TINYINT DEFAULT 0;
+                            SELECT id, nome INTO p_cliente_id, p_cliente_nome
                             FROM cliente
-                            WHERE id = NEW.id_cliente;
+                            ORDER BY RAND()
+                            LIMIT 1;
 
-                            IF NOT EXISTS (
-                                SELECT 1 FROM clienteespecial WHERE id_cliente = NEW.id_cliente
-                            ) THEN
-                                INSERT INTO clienteespecial (id_cliente, nome, sexo, idade, cashback)
-                                VALUES (NEW.id_cliente, nome_cliente, sexo_cliente, idade_cliente, cashback_valor);
-                            ELSE
+                            SELECT COUNT(*) INTO v_eh_especial
+                            FROM clienteespecial
+                            WHERE id_cliente = p_cliente_id;
+
+                            IF v_eh_especial > 0 THEN
+                                SET p_valor_voucher = 200.00;
                                 UPDATE clienteespecial
-                                SET cashback = cashback + cashback_valor
-                                WHERE id_cliente = NEW.id_cliente;
+                                SET cashback = cashback + p_valor_voucher
+                                WHERE id_cliente = p_cliente_id;
+                            ELSE
+                                SET p_valor_voucher = 100.00;
                             END IF;
-                        END IF;
-                    END $$
-                    DELIMITER ;
-                """;
+
+                            SELECT p_cliente_id AS 'ID', p_cliente_nome AS 'Cliente Sorteado', p_valor_voucher AS 'Valor do Voucher', IF(v_eh_especial > 0, 'Especial', 'Regular') AS 'Tipo';
+                        END
+                        """,
+
+                // Procedure: sp_reajustar_salarios
+                "DROP PROCEDURE IF EXISTS sp_reajustar_salarios",
+                """
+                        CREATE PROCEDURE sp_reajustar_salarios(
+                            IN p_categoria ENUM('vendedor', 'gerente', 'CEO', 'assistente', 'supervisor'),
+                            IN p_percentual DECIMAL(5,2)
+                        )
+                        BEGIN
+                            UPDATE funcionario
+                            SET salario = salario * (1 + p_percentual/100)
+                            WHERE cargo = p_categoria AND id > 0;
+                        END
+                        """,
+
+                // Triggers: Bônus e Cashback
+                "DROP TRIGGER IF EXISTS trg_bonus_funcionario_vendedor_insert",
+                """
+                        CREATE TRIGGER trg_bonus_funcionario_vendedor_insert
+                        AFTER INSERT ON venda
+                        FOR EACH ROW
+                        BEGIN
+                            DECLARE v_cargo VARCHAR(20);
+                            DECLARE v_bonus DECIMAL(10,2);
+
+                            SELECT cargo INTO v_cargo FROM funcionario WHERE id = NEW.id_vendedor;
+
+                            IF v_cargo = 'vendedor' AND NEW.valor > 1000 THEN
+                                SET v_bonus = NEW.valor * 0.05;
+
+                                IF NOT EXISTS (SELECT 1 FROM funcionarioespecial WHERE id = NEW.id_vendedor) THEN
+                                    INSERT INTO funcionarioespecial (id, bonus) VALUES (NEW.id_vendedor, v_bonus);
+                                ELSE
+                                    UPDATE funcionarioespecial SET bonus = bonus + v_bonus WHERE id = NEW.id_vendedor;
+                                END IF;
+                            END IF;
+                        END
+                        """,
+
+                "DROP TRIGGER IF EXISTS trg_cashback_clienteespecial_insert",
+                """
+                        CREATE TRIGGER trg_cashback_clienteespecial_insert
+                        AFTER INSERT ON venda
+                        FOR EACH ROW
+                        BEGIN
+                            DECLARE cashback_valor DECIMAL(10,2);
+                            DECLARE nome_cliente VARCHAR(100);
+                            DECLARE sexo_cliente CHAR(1);
+                            DECLARE idade_cliente INT;
+
+                            IF NEW.valor > 500.00 THEN
+                                SET cashback_valor = NEW.valor * 0.02;
+
+                                SELECT nome, sexo, idade
+                                INTO nome_cliente, sexo_cliente, idade_cliente
+                                FROM cliente
+                                WHERE id = NEW.id_cliente;
+
+                                IF NOT EXISTS (
+                                    SELECT 1 FROM clienteespecial WHERE id_cliente = NEW.id_cliente
+                                ) THEN
+                                    INSERT INTO clienteespecial (id_cliente, nome, sexo, idade, cashback)
+                                    VALUES (NEW.id_cliente, nome_cliente, sexo_cliente, idade_cliente, cashback_valor);
+                                ELSE
+                                    UPDATE clienteespecial
+                                    SET cashback = cashback + cashback_valor
+                                    WHERE id_cliente = NEW.id_cliente;
+                                END IF;
+                            END IF;
+                        END
+                        """
+        };
 
         try (Connection conexao = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
                 Statement stmt = conexao.createStatement()) {
 
-            stmt.execute(sql);
-            stmt.execute(procedure);
-            stmt.execute(triggers);
-            System.out.println("Tabelas, procedure e triggers criadas com sucesso!");
+            for (String comando : comandos) {
+                stmt.execute(comando);
+            }
+
+            System.out.println("Tabelas, procedures e triggers criadas com sucesso!");
 
         } catch (SQLException e) {
             System.out.println("Erro ao criar estruturas: " + e.getMessage());
@@ -380,6 +373,89 @@ public class DatabaseManager {
             System.out.println("Tabelas deletadas com sucesso!");
         } catch (SQLException e) {
             System.out.println("Erro ao deletar tabelas: " + e.getMessage());
+        }
+    }
+
+    public void sortearCliente() {
+        CallableStatement stmt = null;
+
+        try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha())) {
+            stmt = conn.prepareCall("{CALL sp_sortear_cliente(?, ?, ?)}");
+
+            // Registrar os parâmetros de saída
+            stmt.registerOutParameter(1, Types.INTEGER); // p_cliente_id
+            stmt.registerOutParameter(2, Types.VARCHAR); // p_cliente_nome
+            stmt.registerOutParameter(3, Types.DECIMAL); // p_valor_voucher
+
+            // Executa a procedure
+            stmt.execute();
+
+            // Recupera os valores de saída
+            int id = stmt.getInt(1);
+            String nome = stmt.getString(2);
+            double voucher = stmt.getDouble(3);
+
+            // Verifica se o cliente é especial
+            String tipo = (isClienteEspecial(conn, id)) ? "Especial" : "Regular";
+
+            // Exibe o resultado
+            System.out.println("Cliente Sorteado:");
+            System.out.println("ID: " + id);
+            System.out.println("Nome: " + nome);
+            System.out.println("Tipo: " + tipo);
+            System.out.println("Valor do Voucher: R$" + String.format("%.2f", voucher));
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao sortear cliente: " + e.getMessage());
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException ignored) {
+            }
+        }
+    }
+
+    private static boolean isClienteEspecial(Connection conn, int idCliente) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM clienteespecial WHERE id_cliente = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idCliente);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void limparClientesComCashbackZero() {
+        String sqlDelete = "DELETE FROM clienteespecial WHERE cashback = 0";
+
+        try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
+                Statement stmt = conn.createStatement()) {
+            int afetados = stmt.executeUpdate(sqlDelete);
+            System.out.println("Clientes removidos: " + afetados);
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover clientes com cashback 0: " + e.getMessage());
+        }
+    }
+
+    public void reajustarSalarios(String categoria, double percentual) {
+        String sql = "{CALL sp_reajustar_salarios(?, ?)}";
+
+        try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
+                CallableStatement stmt = conn.prepareCall(sql)) {
+
+            stmt.setString(1, categoria);
+            stmt.setDouble(2, percentual);
+
+            stmt.execute();
+
+            System.out.printf("Salários da categoria '%s' reajustados em %.2f%%%n", categoria, percentual);
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao reajustar salários: " + e.getMessage());
         }
     }
 
