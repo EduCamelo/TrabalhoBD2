@@ -133,7 +133,15 @@ public class App {
                             case 11:
                                 DB.exibirEstatisticas();
                                 break;
-
+                            case 12:
+                                DB.exibirProdutos();
+                                break;
+                            case 13:
+                                DB.exibirFuncionarios();
+                                break;
+                            case 14:
+                                DB.exibirClientes();
+                                break;    
                             default:
                                 break;
                         }
@@ -174,6 +182,9 @@ public class App {
         System.out.println("9.  Exibir vendas por produto");
         System.out.println("10. Exibir vendas por vendedor");
         System.out.println("11. Exibir Estatisticas");
+        System.out.println("12. Exibir Produtos");
+        System.out.println("13. Exibir Funcionario");
+        System.out.println("14. Exibir Clientes");
         System.out.println("0.  Sair do banco de dados");
         System.out.println();
         System.out.print("Escolha uma das opções: ");

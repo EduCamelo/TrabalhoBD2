@@ -694,6 +694,100 @@ public class DatabaseManager {
         }
     }
 
+    public void exibirProdutos() {
+        String sql = "SELECT id, nome, quantidade, valor FROM produto ORDER BY id";
+
+        try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("=== Lista de Produtos ===");
+            
+            while (rs.next()) {
+                String valorFormatado = String.format("R$%.2f", rs.getDouble("valor")).replace(".", ",");
+                
+                System.out.printf("ID: %d | Nome: %s | Quantidade: %d | Valor: %s%n",
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getInt("quantidade"),
+                    valorFormatado);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao consultar produtos: " + e.getMessage());
+        }
+    }
+
+        public void exibirFuncionarios() {
+            String sql = "SELECT id, nome, idade, sexo, cargo, salario FROM funcionario ORDER BY nome";
+
+            try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery()) {
+
+                System.out.println("=== Lista de Funcionários ===");
+                
+                while (rs.next()) {
+                    // Formatando o salário com vírgula decimal
+                    String salarioFormatado = String.format("R$%.2f", rs.getDouble("salario")).replace(".", ",");
+                    
+                    System.out.printf("ID: %d | Nome: %s | Idade: %d | Sexo: %s | Cargo: %s | Salário: %s%n",
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getInt("idade"),
+                        formatarSexo(rs.getString("sexo")), // Método para formatar m/f/o
+                        formatarCargo(rs.getString("cargo")), // Método para formatar o cargo
+                        salarioFormatado);
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Erro ao consultar funcionários: " + e.getMessage());
+            }
+        }
+        public void exibirClientes() {
+        String sql = "SELECT id, nome, sexo, idade FROM cliente ORDER BY nome";
+
+        try (Connection conn = DriverManager.getConnection(getUrl(), getUsuario(), getSenha());
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("=== Lista de Clientes ===");
+            
+            while (rs.next()) {
+                System.out.printf("ID: %d | Nome: %s | Sexo: %s | Idade: %d%n",
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    formatarSexo(rs.getString("sexo")), // Usando o mesmo método auxiliar
+                    rs.getInt("idade"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao consultar clientes: " + e.getMessage());
+        }
+    }
+
+    // Método auxiliar para formatar o sexo
+    private String formatarSexo(String sexo) {
+        return switch (sexo.toLowerCase()) {
+            case "m" -> "Masculino";
+            case "f" -> "Feminino";
+            case "o" -> "Outro";
+            default -> sexo;
+        };
+    }
+
+    // Método auxiliar para formatar o cargo
+    private String formatarCargo(String cargo) {
+        return switch (cargo.toLowerCase()) {
+            case "vendedor" -> "Vendedor";
+            case "gerente" -> "Gerente";
+            case "ceo" -> "CEO";
+            case "assistente" -> "Assistente";
+            case "supervisor" -> "Supervisor";
+            default -> cargo;
+        };
+    }
+
     public void realizarVenda(int idVendedor, int idCliente, int idProduto, int quantidade) {
         String sql = "{CALL sp_realizar_venda(?, ?, ?, ?, ?)}";
 
